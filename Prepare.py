@@ -38,15 +38,6 @@ def train_test_validate(df):
             ", test percent: ", round(((test.shape[0])/total),2) * 100)
     return train, validate, test 
 
-# Removing outliers
-# outliers will be any value that is more than 3 standdard deviations from the average
-threshold = 3
-# print(np.where(z > 3))
-Q1 = train.quantile(0.25)
-Q3 = train.quantile(0.75)
-IQR = Q3 - Q1
-train_o = train[(z < 3).all(axis=1)]
-
 
 # Scaling
 # 1. Create the Scaling Object
