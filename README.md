@@ -27,20 +27,18 @@ The main tables within the Zillow database are predictions_2016 and predictions_
 | Feature                   | Definition                                                                                                                                                       | Type        |
 |---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | parcelid                  | assigned by your local tax assessment office, unique for each property                                                                                           | discrete    |
-| *sqft                     | squarefeet, length ft. x width ft.                                                                                                                               | continuous  |
-| buildingclass             | description of wall structure, materials, etc. (1-5 or null)                                                                                                     | categorical |
-| buildingqualitytypeid     | no description (1-12 or null)                                                                                                                                    | categorical |
-| decktypeid                | no description (66 or null)                                                                                                                                      | categorical |
-| finishedsqft*             | no description (1 - 290345)                                                                                                                                      | continuous  |
+| calculatedfinishedsquarefeet                    | squarefeet, length ft. x width ft.      | continuous  |  
+| bedroomcnt                   | Number of bedrooms in a unit      | discrete  |  
+| bathroomcnt                   | Number of bathrooms in a unit      | discrete  | 
+| taxvaluedollarcnt                   | Property taxes of unit for the year      | continuous  | 
 | fips                      | Federal Information Processing Standards (6037, 6059, 6111, or null) uniquely identify geographic areas                                                          | categorical |
-| heatingorsystem           | description of air conditioning, such as energy source (1-25)                                                                                                    | categorical |
 | latitude                  | distance of a place north or south of the earth's equator                                                                                                        | continuous  |
 | longitude                 | distance of a place east or west of the meridian                                                                                                                 | continuous  |
-| pooltypeid*               | no description (1 or null)                                                                                                                                       | categorical |
 | propertycountylandusecode | Land use zones are the codes that the government uses to classify  parcels of land (chars with numbers)                                                          | discrete    |
 | propertyzoningdesc        | zoning refers to municipal or local laws or regulations that dictate  how real property can and cannot be used in certain geographic areas  (chars with numbers) | discrete    |
-| rawcensustractandblock    | census tracts are relatively small subdivisions of a county block group is a cluster of blocks within a tract                                                    | discrete    |
+
 |                           |                                                                                                                                                                  |             |
+
 
 The visual below takes a more in-depth look at the original database. We can see how the properties tables for 2016 and 2017 contain a majority of the data. These tables also have a whopping amount of 52 columns. Before prepping the data, we can use this visual to make ideas on which features we may not need, can be combined, etc.  
 ![zillow-database](https://i.pinimg.com/originals/ef/01/89/ef0189cace1f6e5626e1be0368370062.png)  
@@ -53,11 +51,11 @@ For better quality images, these visuals can also be found on my pinterest [here
 ## Initial Thoughts & Hypothesis
 ### Thoughts
 Taking a surface look as the database, it is apparent feature engineering will be neccessary to create manageable exploration and modeling from the 52 columns. This may include...
-- creating simpler features, such as story count being 1, 2, or more
-- combining different features, such as 
-- removing features with high null values
-- removing unnecessary features, such as long. and latt. when we also have region ids
-- scaling the final dataframe for modeling
+- Creating simpler features, such as story count being 1, 2, or more
+- Combining different features, such as 
+- Removing features with high null values
+- Removing unnecessary features, such as long. and latt. when we also have region ids
+- Scaling the final dataframe for modeling
 ### Hypothesis
 More square footage increases value  
 > Null hypothesis: House square footage is independent of the tax value  
@@ -73,8 +71,37 @@ Location affects property value
 
 # Project Steps
 ## Acquire
+Data was aquired from the Zillow SQL Database.
+Login credentials are required.
+The functions are stored in the Acquire.py file.
+File is a reproducible component for gathering the data.
+
 ## Prepare
+Created a prep.py file. 
+Data is split into train, validate, and test. 
+Dataset is ready to be analyzed.
+Data is scaled as necessary.
+Erroneous or invalid data is identified.
+File is a reproducible component that handles missing values, fixes data integrity issues, changes data types, and scales data.
+
 ## Explore
+•	Run at least 1 t-test and 1 correlation test.
+•	Visualize all combinations of variables in some way(s).
+•	What independent variables are correlated with the dependent?
+•	Which independent variables are correlated with other independent variables?
+
+Summarized your takeaways and conclusions.
+
 ## Model
+Developed a regression model that performs better than a baseline.
+Extablished a baseline model.
+Documented various algorithms and/or hyperparameters.
+Plotted the residuals, computed the evaluation metrics (SSE, RMSE, and/or MSE), compared to baseline, and plotted y by ^y.
+Created a model.py file as 
+File is a reproducible component that will have the functions to fit, predict and evaluate the final model on the test data set.
+
 ## Conclusion
+
 # How to Reproduce
+All files are reproducible and avaiable for download and use. 
+
