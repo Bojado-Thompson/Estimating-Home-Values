@@ -1,7 +1,12 @@
 # Import libraries
 import pandas as pd
+import numpy as np
+from scipy import stats
 from Acquire import get_mvp_home_data
 from scipy import stats
+
+import sklearn.preprocessing
+
 
 # Function to prepare the data
 def prep_zillow_df(df):
@@ -35,37 +40,37 @@ def train_test_validate(df):
     total = df.count()[0]
     print("\ntrain percent: ", round(((train.shape[0])/total),2) * 100, 
             ", validate percent: ", round(((validate.shape[0])/total),2) * 100, 
-            ", test percent: ", round(((test.shape[0])/total),2) * 100)
-    return train, validate, test 
+            ", test percent: ", round(((test.shape[0])/total),2) * 100) 
 
+    # Scaling
+    # 1. Create the Scaling Object
+    scaler = sklearn.preprocessing.StandardScaler()
 
-# Scaling
-# 1. Create the Scaling Object
-scaler = sklearn.preprocessing.StandardScaler()
+    # 2. Fit to the train data only
+    scaler.fit(train.drop('tax_value', axis=1))
 
-# 2. Fit to the train data only
-scaler.fit(train.drop('tax_value', axis=1))
+    # 3. use the object on the whole df
+    # this returns an array, so we convert to df in the same line
+    train_scaled = pd.DataFrame(scaler.transform(train.drop('tax_value', axis=1)))
+    validate_scaled = pd.DataFrame(scaler.transform(validate.drop('tax_value', axis=1)))
+    test_scaled = pd.DataFrame(scaler.transform(test.drop('tax_value', axis=1)))
 
-# 3. use the object on the whole df
-# this returns an array, so we convert to df in the same line
-train_scaled = pd.DataFrame(scaler.transform(train.drop('tax_value', axis=1)))
-validate_scaled = pd.DataFrame(scaler.transform(validate.drop('tax_value', axis=1)))
-test_scaled = pd.DataFrame(scaler.transform(test.drop('tax_value', axis=1)))
+    # the result of changing an array to a df resets the index and columns
+    # for each train, validate, and test, we change the index and columns back to original values
 
-# the result of changing an array to a df resets the index and columns
-# for each train, validate, and test, we change the index and columns back to original values
+    # Train
+    train_scaled.index = train.index
+    train_scaled.columns = ['bath_count_scaled','bed_count_scaled','square_feet_scaled']
+    train = pd.concat((train, train_scaled), axis=1)
 
-# Train
-train_scaled.index = train.index
-train_scaled.columns = ['bath_count_scaled','bed_count_scaled','square_feet_scaled']
-train = pd.concat((train, train_scaled), axis=1)
+    # Validate
+    validate_scaled.index = validate.index
+    validate_scaled.columns = ['bath_count_scaled','bed_count_scaled','square_feet_scaled']
+    validate = pd.concat((validate, validate_scaled), axis=1)
 
-# Validate
-validate_scaled.index = validate.index
-validate_scaled.columns = ['bath_count_scaled','bed_count_scaled','square_feet_scaled']
-validate = pd.concat((validate, validate_scaled), axis=1)
+    # Test
+    test_scaled.index = test.index
+    test_scaled.columns = ['bath_count_scaled','bed_count_scaled','square_feet_scaled']
+    test = pd.concat((test, test_scaled), axis=1)
 
-# Test
-test_scaled.index = test.index
-test_scaled.columns = ['bath_count_scaled','bed_count_scaled','square_feet_scaled']
-test = pd.concat((test, test_scaled), axis=1)
+    return train, validate, test
