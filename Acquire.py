@@ -103,8 +103,8 @@ def get_mvp_home_data():
                         FROM properties_2017 as prop
                         JOIN propertylandusetype as land ON prop.propertylandusetypeid = land.propertylandusetypeid
                         JOIN predictions_2017 as pred ON pred.id = prop.id 
-                            AND (pred.transactiondate LIKE '2017-06-%'
-                            OR pred.transactiondate LIKE '2017-07-%')
+                            AND (pred.transactiondate LIKE '2017-06-%%'
+                            OR pred.transactiondate LIKE '2017-07-%%')
                         WHERE prop.propertylandusetypeid IN (260, 261, 263, 264, 266, 279);
                     '''
 
