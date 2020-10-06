@@ -1,4 +1,4 @@
-# Data is aquired from the company SQL Database, login credentials are required
+# Data is aquired from the company SQL Database, login credentials are required  
 
 #################################### Function Imports ##############################################
 
@@ -39,6 +39,7 @@ def get_home_data():
     If no file found, saves to a csv file and assigns database to df variable.
     If file found, just assigns database to df variable.
     Returns df variable holding the  Home Value database.
+    Includes all 52 Columns.
     '''
     
     # data_name allows the function to work no matter what a user might have saved their file name as
@@ -46,19 +47,18 @@ def get_home_data():
     # First conditional runs if the data is not already stored in the computer
     if os.path.isfile('zillow_home.csv') == False:
 
-        # Querry selects the whole dataframe, joining each table on their foriegn keys
-        # We will have double columns on the foriegn keys because they are joined together
+        # Querry selects the whole predicstion_2017 table from the database
         sql_querry = '''
                         SELECT *
                         FROM properties_2017
                         ;
                     '''
 
-        # Connecting to the data base and using the querry above to select the data
+        # Connecting to the data base and using the query above to select the data
         # the pandas read_sql function reads the query into a DataFrame
         df = pd.read_sql(sql_querry, get_db_url('zillow'))
 
-        # We do not need the duplicate columns from the foriegn tables being joined
+        # If any duplicates found, this removes them
         # df.columns.duplicated() returns a boolean array, True for a duplicate or False if it is unique up to that point
         # Use ~ to flip the booleans and return the df as any columns that are not duplicated
         # df.loc accesses a group of rows and columns by label(s) or a boolean array
@@ -75,9 +75,60 @@ def get_home_data():
 
     return df
 
-    # Code to remove duplicates of a df found at:
-    # https://www.interviewqs.com/ddi_code_snippets/remove_duplicate_cols
+
+#################################### Acquire Zillow MVP Home Data ##############################################
+
+# Function connects to the SQL database to store the data in a variable which can be used throughout the project
+# Saves the data as a .csv file, returns as a pandas data frame
+def get_mvp_home_data():
+
+    '''
+    Connect to SQL Database with url function called within this function.
+    Checks if database is already saved to computer in csv file.
+    If no file found, saves to a csv file and assigns database to df variable.
+    If file found, just assigns database to df variable.
+    Returns df variable holding the  Home Value database for the MVP.
+    ID, bedroom/bathroom count, and taxvaluedollarcnt
+    '''
     
+    # data_name allows the function to work no matter what a user might have saved their file name as
+    # First, we check if the data is already stored in the computer
+    # First conditional runs if the data is not already stored in the computer
+    if os.path.isfile('zillow_home_mvp.csv') == False:
+
+        # Querry selects the whole dataframe, joining each table on their foreign keys
+        # We will have double columns on the foreign keys because they are joined together
+        sql_querry = '''
+                        SELECT id, calculatedfinishedsquarefeet, bedroomcnt, bathroomcnt, taxvaluedollarcnt
+                        FROM properties_2017 as prop
+                        JOIN propertylandusetype as land ON prop.propertylandusetypeid = land.propertylandusetypeid
+                        WHERE prop.propertylandusetypeid IN (260, 261, 263, 264, 266, 279);
+                    '''
+
+        # Connecting to the data base and using the query above to select the data
+        # the pandas read_sql function reads the query into a DataFrame
+        df = pd.read_sql(sql_querry, get_db_url('zillow'))
+
+        # Removes duplicates if any
+        # df.columns.duplicated() returns a boolean array, True for a duplicate or False if it is unique up to that point
+        # Use ~ to flip the booleans and return the df as any columns that are not duplicated
+        # df.loc accesses a group of rows and columns by label(s) or a boolean array
+        df = df.loc[:,~df.columns.duplicated()]
+
+        # The pandas to_csv function writes the data frame to a csv file
+        # This allows data to be stored locally for quicker exploration and manipulation
+        df.to_csv('zillow_home_mvp.csv')
+
+    # This conditional runs if the data has already been saved as a csv (if the function has already been run on your computer)
+    else:
+        # Reads the csv saved from above, and assigns to the df variable
+        df = pd.read_csv('zillow_home_mvp.csv', index_col=0)
+
+    return df
+
+
+
+
 ########################################### Get Location Home Data ####################################################
 def get_home_location():
 
@@ -110,7 +161,7 @@ def get_home_location():
         # the pandas read_sql function reads the query into a DataFrame
         df = pd.read_sql(sql_querry, get_db_url('zillow'))
 
-        # We do not need the duplicate columns from the foriegn tables being joined
+        # Removes duplicates if any
         # df.columns.duplicated() returns a boolean array, True for a duplicate or False if it is unique up to that point
         # Use ~ to flip the booleans and return the df as any columns that are not duplicated
         # df.loc accesses a group of rows and columns by label(s) or a boolean array
