@@ -97,11 +97,14 @@ def get_mvp_home_data():
     if os.path.isfile('zillow_home_mvp.csv') == False:
 
         # Querry selects the whole dataframe, joining each table on their foreign keys
-        # We will have double columns on the foreign keys because they are joined together
+        # Only selecting properties with transaction dates in May and June
         sql_querry = '''
-                        SELECT id, calculatedfinishedsquarefeet, bedroomcnt, bathroomcnt, taxvaluedollarcnt
+                        SELECT prop.id, calculatedfinishedsquarefeet, bedroomcnt, bathroomcnt, taxvaluedollarcnt
                         FROM properties_2017 as prop
                         JOIN propertylandusetype as land ON prop.propertylandusetypeid = land.propertylandusetypeid
+                        JOIN predictions_2017 as pred ON pred.id = prop.id 
+                            AND (pred.transactiondate LIKE '2017-06-%'
+                            OR pred.transactiondate LIKE '2017-07-%')
                         WHERE prop.propertylandusetypeid IN (260, 261, 263, 264, 266, 279);
                     '''
 
@@ -145,16 +148,15 @@ def get_home_location():
     # First conditional runs if the data is not already stored in the computer
     if os.path.isfile('zillow_location.csv') == False:
 
-        # Querry selects the whole dataframe, joing each table on their foriegn keys
-        # We will have double columns on the foriegn keys because they are joined together
+        # Querry selects neccessary columns to determine location of home and the tax values
+        # 
         sql_querry = '''
-                        SELECT id as property_id, fips as county_id, latitude, longitude, taxamount, taxvaluedollarcnt 
-                        FROM properties_2017
-                        WHERE fips is not null 
-                        AND latitude is not null 
-                        AND longitude is not null 
-                        AND taxamount is not null 
-                        AND taxvaluedollarcnt is not null;
+                        SELECT prop.id as property_id, prop.fips as county_id, prop.latitude, prop.longitude, prop.taxamount, prop.taxvaluedollarcnt 
+                        FROM properties_2017 as prop
+                        JOIN predictions_2017 as pred ON pred.id = prop.id 
+                        AND (pred.transactiondate LIKE '2017-06-%'
+                        OR pred.transactiondate LIKE '2017-07-%')
+                        WHERE prop.propertylandusetypeid IN (260, 261, 263, 264, 266, 279);
                     '''
 
         # Connecting to the data base and using the querry above to select the data
