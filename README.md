@@ -26,18 +26,16 @@ The main tables within the Zillow database are predictions_2016 and predictions_
 
 | Feature                   | Definition                                                                                                                                                       | Type        |
 |---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| parcelid                  | assigned by your local tax assessment office, unique for each property                                                                                           | discrete    |
-| calculatedfinishedsquarefeet                    | squarefeet, length ft. x width ft.      | continuous  |  
+| parcelid                  | Assigned by your local tax assessment office, unique for each property                                                                                           | discrete    |
+| calculatedfinishedsquarefeet                    | Square feet: length (ft.) x width (ft.)      | continuous  |  
 | bedroomcnt                   | Number of bedrooms in a unit      | discrete  |  
 | bathroomcnt                   | Number of bathrooms in a unit      | discrete  | 
 | taxvaluedollarcnt                   | Property taxes of unit for the year      | continuous  | 
 | fips                      | Federal Information Processing Standards (6037, 6059, 6111, or null) uniquely identify geographic areas                                                          | categorical |
-| latitude                  | distance of a place north or south of the earth's equator                                                                                                        | continuous  |
-| longitude                 | distance of a place east or west of the meridian                                                                                                                 | continuous  |
+| latitude                  | Distance of a place north or south of the earth's equator                                                                                                        | continuous  |
+| longitude                 | Distance of a place east or west of the meridian                                                                                                                 | continuous  |
 | propertycountylandusecode | Land use zones are the codes that the government uses to classify  parcels of land (chars with numbers)                                                          | discrete    |
-| propertyzoningdesc        | zoning refers to municipal or local laws or regulations that dictate  how real property can and cannot be used in certain geographic areas  (chars with numbers) | discrete    |
-
-|                           |                                                                                                                                                                  |             |
+| propertyzoningdesc        | Zoning refers to municipal or local laws or regulations that dictate  how real property can and cannot be used in certain geographic areas  (chars with numbers) | discrete    |
 
 
 The visual below takes a more in-depth look at the original database. We can see how the properties tables for 2016 and 2017 contain a majority of the data. These tables also have a whopping amount of 52 columns. Before prepping the data, we can use this visual to make ideas on which features we may not need, can be combined, etc.  
@@ -103,5 +101,5 @@ File is a reproducible component that will have the functions to fit, predict an
 ## Conclusion
 
 # How to Reproduce
-All files are reproducible and avaiable for download and use. 
+All files are reproducible and available for download and use. 
 
