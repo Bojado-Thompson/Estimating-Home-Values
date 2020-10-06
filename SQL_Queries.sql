@@ -3,11 +3,23 @@
 SELECT *
 FROM properties_2017;
 
+# 19,149 values
+# Query for MVP, only includes square feet, bedroom, and bathroom as X features 
+# Narrows down to "Hot" months of May and July
+SELECT prop.id, calculatedfinishedsquarefeet, bedroomcnt, bathroomcnt, taxvaluedollarcnt
+FROM properties_2017 as prop
+JOIN propertylandusetype as land ON prop.propertylandusetypeid = land.propertylandusetypeid
+JOIN predictions_2017 as pred ON pred.id = prop.id 
+	AND (pred.transactiondate LIKE '2017-06-%'
+	OR pred.transactiondate LIKE '2017-07-%')
+WHERE prop.propertylandusetypeid IN (260, 261, 263, 264, 266, 279);
+
 # 2,699,253 values
 # Query for MVP, only includes square feet, bedroom, and bathroom as X features
 SELECT id, calculatedfinishedsquarefeet, bedroomcnt, bathroomcnt, taxvaluedollarcnt
 FROM properties_2017 as prop
 JOIN propertylandusetype as land ON prop.propertylandusetypeid = land.propertylandusetypeid
+JOIN 
 WHERE prop.propertylandusetypeid IN (260, 261, 263, 264, 266, 279);
 
 # Checking null values in features used in MVP query
@@ -32,3 +44,10 @@ SELECT land.propertylandusetypeid, propertylandusedesc as property_description, 
 FROM properties_2017 as prop
 JOIN propertylandusetype as land ON prop.propertylandusetypeid = land.propertylandusetypeid
 GROUP BY land.propertylandusetypeid;
+
+SELECT prop.id as property_id, prop.fips as county_id, prop.latitude, prop.longitude, prop.taxamount, prop.taxvaluedollarcnt 
+FROM properties_2017 as prop
+JOIN predictions_2017 as pred ON pred.id = prop.id 
+	AND (pred.transactiondate LIKE '2017-06-%'
+	OR pred.transactiondate LIKE '2017-07-%')
+WHERE prop.propertylandusetypeid IN (260, 261, 263, 264, 266, 279);
