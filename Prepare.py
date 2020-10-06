@@ -6,6 +6,11 @@ from Acquire import get_mvp_home_data
 def prep_zillow_df(df):
     # Dropped null values
     df = df.dropna()
+    # Rename column names
+    df = df.rename(columns = {'calculatedfinishedsquarefeet':'sqft'})
+    df = df.rename(columns = {'bedroomcnt':'bedroom_count'})
+    df = df.rename(columns = {'bathroomcnt':'bathroom_count'})
+    df = df.rename(columns = {'taxvaluedollarcnt':'tax_value'}) 
     return df
 
 
