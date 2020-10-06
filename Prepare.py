@@ -36,7 +36,7 @@ def train_test_validate(df):
     print("\ntrain percent: ", round(((train.shape[0])/total),2) * 100, 
             ", validate percent: ", round(((validate.shape[0])/total),2) * 100, 
             ", test percent: ", round(((test.shape[0])/total),2) * 100)
-    return train, validate, test
+    return train, validate, test 
 
 # Removing outliers
 # outliers will be any value that is more than 3 standdard deviations from the average
