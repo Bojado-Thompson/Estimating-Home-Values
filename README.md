@@ -106,7 +106,7 @@ Summarized your takeaways and conclusions.
 Key Drivers of market value for single unit properties are (listed from highest correlation to lowest):
 - Square footage of property
 - Bathroom count
-- Bedrooms count  
+- Bedroom count  
 
 Observations:
 - Most units are 3 bedrooms/ 2 bath
