@@ -69,36 +69,50 @@ Location affects property value
 
 # Project Steps
 ## Acquire
-Data was aquired from the Zillow SQL Database.
-Login credentials are required.
-The functions are stored in the Acquire.py file.
-File is a reproducible component for gathering the data.
+- Data was aquired from the Zillow SQL Database.
+- Login credentials are required.
+- The functions are stored in the Acquire.py file.
+- File is a reproducible component for gathering the data.
 
 ## Prepare
-Created a prep.py file. 
-Data is split into train, validate, and test. 
-Dataset is ready to be analyzed.
-Data is scaled as necessary.
-Erroneous or invalid data is identified.
-File is a reproducible component that handles missing values, fixes data integrity issues, changes data types, and scales data.
+- Created a prep.py file. 
+- Data is split into train, validate, and test. 
+- Dataset is ready to be analyzed.
+- Data is scaled as necessary.
+- Erroneous or invalid data is identified.
+- File is a reproducible component that handles missing values, fixes data integrity issues, changes data types, and scales data.
 
 ## Explore
-•	Run at least 1 t-test and 1 correlation test.
-•	Visualize all combinations of variables in some way(s).
-•	What independent variables are correlated with the dependent?
-•	Which independent variables are correlated with other independent variables?
+- Run at least 1 t-test and 1 correlation test.
+- Visualize all combinations of variables in some way(s).
+- What independent variables are correlated with the dependent?
+- Which independent variables are correlated with other independent variables?
 
 Summarized your takeaways and conclusions.
 
 ## Model
-Developed a regression model that performs better than a baseline.
-Extablished a baseline model.
-Documented various algorithms and/or hyperparameters.
-Plotted the residuals, computed the evaluation metrics (SSE, RMSE, and/or MSE), compared to baseline, and plotted y by ^y.
-Created a model.py file as 
-File is a reproducible component that will have the functions to fit, predict and evaluate the final model on the test data set.
+- Developed a regression model that performs better than a baseline.
+- Extablished a baseline model.
+- Documented various algorithms and/or hyperparameters.
+- Plotted the residuals, computed the evaluation metrics (SSE, RMSE, and/or MSE), compared to baseline, and plotted y by ^y.
+- Created a model.py file as 
+- File is a reproducible component that will have the functions to fit, predict and evaluate the final model on the test data set.
 
 ## Conclusion
+Key Drivers of market value for single unit properties are (listed from highest correlation to lowest):
+- Square footage of property
+- Bathroom count
+- Bedrooms count  
+
+Observations:
+- Most units are 3 bedrooms/ 2 bath
+- Whether a property has a garage, it greatly affects that total square footage
+- Three counties were listed in database:
+    - Los Angeles County
+    - Orange County
+    - Ventura County
+- Orange County has the highest average tax value for properties
+- Los Angeles County has the most amount of properties
 
 # How to Reproduce
 All files are reproducible and available for download and use. 
