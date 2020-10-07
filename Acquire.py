@@ -50,7 +50,11 @@ def get_home_data():
         # Querry selects the whole predicstion_2017 table from the database
         sql_querry = '''
                         SELECT *
-                        FROM properties_2017
+                        FROM properties_2017 as prop
+                        JOIN predictions_2017 as pred ON pred.id = prop.id 
+	                        AND (pred.transactiondate LIKE '2017-06-%'
+	                        OR pred.transactiondate LIKE '2017-07-%')
+                        WHERE prop.propertylandusetypeid IN (260, 261, 263, 264, 266, 279);
                         ;
                     '''
 
@@ -154,8 +158,8 @@ def get_home_location():
                         SELECT prop.id as property_id, prop.fips as county_id, prop.latitude, prop.longitude, prop.taxamount, prop.taxvaluedollarcnt 
                         FROM properties_2017 as prop
                         JOIN predictions_2017 as pred ON pred.id = prop.id 
-                        AND (pred.transactiondate LIKE '2017-06-%'
-                        OR pred.transactiondate LIKE '2017-07-%')
+                            AND (pred.transactiondate LIKE '2017-06-%'
+                            OR pred.transactiondate LIKE '2017-07-%')
                         WHERE prop.propertylandusetypeid IN (260, 261, 263, 264, 266, 279);
                     '''
 
