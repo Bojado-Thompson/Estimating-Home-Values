@@ -1,11 +1,15 @@
 # Predicting Home Values for Zillow
 ## About the Project
-### Goals
 Zillow first launched in 2006. Since then, our company has accumulated a living database of more than 110 million US homes. Not only do we keep track of homes on the market, but off the market as well. What do we do with this data? One value we create is the [Zestimate®](https://www.zillow.com/zestimate/) - the estimate of a home's market value.  
 
-The purpose of this project is determine what influences this value based on previous property data during the two months of high real estate demand - May and June.
+### Goals
+The purpose of this project is determine what influences this value based on previous property data during the two months of high real estate demand - May and June.  
 
-Deliverables for this project include:
+We want to be able to predict :
+- Key Drivers of market value for single unit properties
+- Distribution of tax rates for each county
+
+### Deliverables:
 > - Final model created to predict the values of single unit properties that the tax district assesses
 > - A reproducable Github repo containing
 >   - Walkthrough of the DS pipeline within a jupyter notebook
@@ -116,4 +120,14 @@ Observations:
 
 # How to Reproduce
 All files are reproducible and available for download and use. 
+- Acquire.py
+- Prepare.py
+- Final_Report.ipynb
+- Must use login credentials to access Zillow database
 
+# Contact Us 
+Bethany Thompson
+- thompson.bethany.01@gmail.com
+
+Dani Bojado
+- daniella.bojado@gmail.com 
