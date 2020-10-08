@@ -124,8 +124,8 @@ Observations:
 # How to Reproduce
 All files are reproducible and available for download and use (need login credentials for access to Zillow company database).
 - [x] Read this README.md
-- [ ] Download the Aquire.py, Prepare.py, and Final_Report.ipynb into your working directory
-- [ ] Run the Modeling.ipynb notebook
+- [ ] Download the Aquire.py, Prepare.py, and Final_Report.ipynb files into your working directory
+- [ ] Run the Final_Report.ipynb notebook
 - [ ] Have fun doing your own exploring, modeling, and more! 
 # Contact Us 
 Bethany Thompson
