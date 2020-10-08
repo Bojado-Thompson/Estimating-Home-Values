@@ -14,9 +14,12 @@ We want to be able to predict :
 > - A reproducable Github repo containing
 >   - Walkthrough of the DS pipeline within a jupyter notebook
 >   - Acquire/Prepare modules in .py files
-> - In a seperate presentation (adding link when complete), answers for the
+> - In a seperate [presentation](https://www.canva.com/design/DAEJHH1EJTc/qvAwFB_uv1vlAHHPeaX93w/view?utm_content=DAEJHH1EJTc&utm_campaign=designshare&utm_medium=link&utm_source=homepage_design_menu), answers for the
 >   - States and counties properties are located in
 >   - Distribution of tax rates for each county
+> - Tableau Workbooks on:
+>   - Drivers of Property Tax [Value](https://public.tableau.com/profile/thompson.bethany.01#!/vizhome/ZillowDataWorkbook2/Story1?publish=yes)
+>   - Distribution of Tax Rates by [County](https://public.tableau.com/profile/thompson.bethany.01#!/vizhome/ZillowStorybook/Story1)
 
 ### Background
 
