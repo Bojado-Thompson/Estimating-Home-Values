@@ -122,12 +122,11 @@ Observations:
 - Los Angeles County has the most amount of properties
 
 # How to Reproduce
-All files are reproducible and available for download and use. 
-- Acquire.py
-- Prepare.py
-- Final_Report.ipynb
-- Must use login credentials to access Zillow database
-
+All files are reproducible and available for download and use (need login credentials for access to Zillow company database).
+- [x] Read this README.md
+- [ ] Download the Aquire.py, Prepare.py, and Final_Report.ipynb into your working directory
+- [ ] Run the Modeling.ipynb notebook
+- [ ] Have fun doing your own exploring, modeling, and more! 
 # Contact Us 
 Bethany Thompson
 - thompson.bethany.01@gmail.com
